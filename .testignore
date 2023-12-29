@@ -1,0 +1,4 @@
+# regular expressions for deleting from cover.out
+
+fixtures\.go # remove all "fixtures.go" files
+api_config\.go # remove all "api_config.go" files

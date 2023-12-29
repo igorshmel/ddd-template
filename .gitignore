@@ -1,0 +1,8 @@
+.idea
+.vscode
+
+app/reports
+app/out
+app/cmd/default_ddd/main
+
+*.env

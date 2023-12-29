@@ -1,0 +1,35 @@
+### Создание юзера
+POST {{host}}/api/v1/user/
+Content-Type: application/json
+
+{
+  "user_name": "Igor Shmel"
+}
+
+### Создание продукта
+POST {{host}}/api/v1/product/
+Content-Type: application/json
+
+{
+  "title": "Product_3",
+  "price": 1265,
+  "quantity": 7
+}
+
+### Создание позиции заказа
+POST {{host}}/api/v1/cart_item/
+Content-Type: application/json
+
+{
+  "product_uuid": "a72daff5-0300-4cbd-a744-0f42f894a5e8",
+  "quantity": 2
+}
+
+### Создание заказа
+POST {{host}}/api/v1/order/
+Content-Type: application/json
+
+{
+  "user_uuid": "ad1497d2-220b-4945-ad2c-4672bcc92bb5",
+  "cart_item_uuids": ["5c3b4243-f566-49a5-afb8-06f76817e06e"]
+}

@@ -1,0 +1,154 @@
+openapi: 3.0.3
+info:
+  title: Document DDD Template API
+  description: Описание API сервиса DDD Template
+  version: 0.0.1
+servers:
+  - url: http://localhost:6667/api/v1/
+    description: локальный стенд
+paths:
+  /user/:
+    post:
+      tags:
+        - Пользователи
+      summary: Создает пользователя
+      description: Создает пользователя
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        '200':
+          description: Ответ на запрос создания пользователя
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+  /product/:
+    post:
+      tags:
+        - Товары
+      summary: Создает товар
+      description: Создает товар
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProduct'
+      responses:
+        '200':
+          description: Ответ на запрос создания товара
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+  /cart_item/:
+    post:
+      tags:
+        - Позиции заказа
+      summary: Создает позицию заказа
+      description: Создает позицию заказа
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCartItem'
+      responses:
+        '200':
+          description: Ответ на запрос создания позиции заказа
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+  /order/:
+    post:
+      tags:
+        - Заказы
+      summary: Создает заказ
+      description: Создает заказ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrder'
+      responses:
+        '200':
+          description: Ответ на запрос создания заказа
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ErrorResponse:
+      description: Ответ, содержащий ошибку
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+
+    CreateUser:
+      description: Создание пользователя
+      type: object
+      properties:
+        user_name:
+          description: Имя пользователя
+          type: string
+          example: Ivanov Ivan
+
+    CreateProduct:
+      description: Создание товара
+      type: object
+      properties:
+        title:
+          description: Наименование товара
+          type: string
+          example: milk
+        price:
+          description: Стоимость товара в минорных единицах
+          type: integer
+          example: 1234
+        quantity:
+          description: Количество товара
+          type: integer
+          example: 12
+
+    CreateCartItem:
+      description: Создание позиции заказа
+      type: object
+      properties:
+        product_uuid:
+          description: Уникальный номер товара
+          type: string
+          format: uuid
+          example: a72daff5-0300-4cbd-a744-0f42f894a5e8
+        quantity:
+          description: Количество товара в позиции
+          type: integer
+          example: 12
+
+    CreateOrder:
+      description: Создание заказа
+      type: object
+      properties:
+        user_uuid:
+          description: Уникальный номер пользователя которому принадлежит заказ
+          type: string
+          format: uuid
+          example: a72daff5-0300-4cbd-a744-0f42f894a5e8
+        cart_item_uuids:
+          description: Массив уникальных номеров позиций заказа
+          type: array
+          example: ["5c3b4243-f566-49a5-afb8-06f76817e06e","ad1497d2-220b-4945-ad2c-4672bcc92bb5"]
